@@ -6,7 +6,7 @@ A Python script that automatically extracts transactions from Apple Card PDF sta
 
 ## Project Overview
 
-This script reads an Apple Card PDF statement, detects transactions based on the date format (MM/DD/YYYY), and extracts the **Date**, **Merchant**, and **Amount**. The transactions are then exported to an Excel file for easy viewing and further analysis.
+This script reads an Apple Card PDF statement, detects transactions based on the date format (MM/DD/YYYY), and extracts the **Date**, **Merchant information**, and **Amounts**. The transactions are then exported to an Excel file for easy viewing and further analysis.
 
 The goal is to save time and avoid manually copying transaction data from PDFs to spreadsheets.
 
@@ -16,7 +16,7 @@ The goal is to save time and avoid manually copying transaction data from PDFs t
 
 - Reads and processes Apple Card PDF statements page by page  
 - Identifies transaction lines using a date pattern (MM/DD/YYYY)  
-- Extracts and cleans transaction data: Date, Merchant, Amount  
+- Extracts and cleans transaction data: "Merchant Name", "Date", "Amount", "Merchant Information", "Daily Cash %", "Daily Cash"  
 - Removes `$` symbols and commas from amounts  
 - Exports the clean data to an Excel file (`.xlsx`)  
 
