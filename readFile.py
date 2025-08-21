@@ -28,15 +28,35 @@ with pdfplumber.open(PDF_PATH) as pdf: # Open the PDF file
                 date = parts[0]  # First part is the date
 
                 merchant_name = []  # List to hold merchant name parts
+                merchant_parts = []  # List to hold merchant address/misc parts
+                
                 i = 1  # index for merchant name parts
                 while i < len(parts) - 3:
+                    # ---Case 1 (TST* Transactions)---
+                    pattern = r"^([A-Za-z]+)([0-9]+)$" # GOLF2401
+                    match = re.match(pattern, parts[i])
+                    
+                    if match:
+                        # print(parts[i] + " matches Case 1")
+                        letters = match.group(1) # GOLF
+                        merchant_name.append(letters)
+                        
+                        numbers = match.group(2) # 2401
+                        merchant_parts.append(numbers)
+                        break
+                        
+                    # ---Case 2 (Address information)---
                     if parts[i][0].isdigit() or parts[i][0] in TARGET_CHAR:
+                        # print(parts[i] + " matches Case 2")
                         break  # stop at address or special character
+
+                    # ---Case 3 (Normal word)---
+                    # print(parts[i] + " matches Case 3")
                     merchant_name.append(parts[i])
                     i += 1
 
                 merchant_name = " ".join(merchant_name)  # Join the merchant name parts into a single string
-                merchant_parts = " ".join(parts[i:-3])
+                merchant_parts = " ".join(merchant_parts + parts[i:-3])
                 daily_cash_percentage = parts[-3]  # Second to last part is daily cash percentage
                 daily_cash = parts[-2]  # Last part is daily cash
                 amount = parts[-1]  # Last part is amount
