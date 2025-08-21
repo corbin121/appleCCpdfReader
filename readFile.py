@@ -70,8 +70,9 @@ with pdfplumber.open(PDF_PATH) as pdf: # Open the PDF file
                     # --- CHANGE ORDER OF DATA L -> R ORGANIZATION INTO EXCEL OUTPUT
                     merchant_name, date, amount, merchant_parts, daily_cash_percentage, daily_cash
                 ])
-
-
+                
+print("Transactions parsed successfully, appending...")
+    
 # --- CONVERT TRANSACTIONS TO A DATAFRAME AND EXPORT TO EXCEL ---
 print("Converting transactions to DataFrame...")
                                                     # --- CHANGE COLUMN HEADERS ACCORDDING TO TRASACTIONS ORDER ---
