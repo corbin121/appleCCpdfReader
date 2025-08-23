@@ -5,10 +5,14 @@ import re  # Regular expressions library for pattern recognition
 
 
 # ---GLOBAL VARIABLES---
-PDF_PATH = "Apple Card Statement - July 2025.pdf"  # Apple Card Statement - MONTH YEAR.pdf
+PDF_PATH = "Apple Card Statement - MONTH YEAR.pdf"  # Apple Card Statement - MONTH YEAR.pdf
 TRANSACTIONS = []
 TARGET_CHAR = "#-$"
 
+# ---USER DATE INPUT---
+month = input("Enter the month: ").title() # Ask for the month
+year = input("Enter the year: ").title() # Ask for the year
+PDF_PATH = f"Apple Card Statement - {month} {year}.pdf" # Set the PDF path
 
 # ---EXTRACT TRANSACTIONS---
 with pdfplumber.open(PDF_PATH) as pdf: # Open the PDF file
@@ -72,13 +76,13 @@ with pdfplumber.open(PDF_PATH) as pdf: # Open the PDF file
                 ])
                 
 print("Transactions parsed successfully, appending...")
-    
+
 # --- CONVERT TRANSACTIONS TO A DATAFRAME AND EXPORT TO EXCEL ---
 print("Converting transactions to DataFrame...")
                                                     # --- CHANGE COLUMN HEADERS ACCORDDING TO TRASACTIONS ORDER ---
 df = pd.DataFrame(TRANSACTIONS, columns=["Merchant Name", "Date", "Amount", "Merchant Information", "Daily Cash %", "Daily Cash"])
 print("Exporting to Excel...")
-df.to_excel("Apple Card Transactions - July 2025.xlsx", index=False) # Apple Card Transactions - MONTH YEAR.xlsx
+df.to_excel(f"Apple Card Transactions - {month} {year}.xlsx", index=False) # Apple Card Transactions - MONTH YEAR.xlsx
 
 # Exit the program
 print("Transactions successfully extracted and saved to Excel file.")
